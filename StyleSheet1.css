@@ -17,7 +17,7 @@
 }
 
 .typing::before {
-    content: "Initializing void...";
+    content: "@nys3";
     animation: typing 7s steps(20) infinite;
     overflow: hidden;
     white-space: nowrap;
