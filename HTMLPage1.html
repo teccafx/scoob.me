@@ -1,0 +1,89 @@
+﻿<div id="terminal">
+    <span id="text"></span><span id="cursor">█</span>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap');
+
+    body {
+        margin: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #terminal {
+        font-family: 'JetBrains Mono',monospace;
+        font-size: 34px;
+        color: #ff0000;
+        text-shadow: 0 0 5px #ff0000, 0 0 15px #ff0000, 0 0 35px #880000;
+        letter-spacing: 2px;
+        user-select: none;
+    }
+
+    #cursor {
+        animation: blink .8s infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+</style>
+
+<script>
+    const lines=[
+    "Initializing darkness...",
+    "Connecting to the abyss...",
+    "Decrypting forgotten memories...",
+    "ERROR: Humanity not found.",
+    "Injecting fear...",
+    "Reality corrupted.",
+    "Loading eternal night...",
+    "Welcome."
+    ];
+
+    const speed=45;
+    const eraseSpeed=20;
+    const pause=1800;
+
+    let line=0;
+    let char=0;
+    let deleting=false;
+
+    const text=document.getElementById("text");
+
+    function loop(){
+
+    const current=lines[line];
+
+    if(!deleting){
+
+    text.textContent=current.substring(0,char++);
+
+    if(char>current.length){
+    deleting=true;
+    return setTimeout(loop,pause);
+    }
+
+    }else{
+
+    text.textContent=current.substring(0,char--);
+
+    if(char<0){
+    deleting=false;
+    line=(line+1)%lines.length;
+    }
+
+    }
+
+    setTimeout(loop,deleting?eraseSpeed:speed+Math.random()*40);
+
+    }
+
+    loop();
+</script>
